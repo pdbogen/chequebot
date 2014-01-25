@@ -1,6 +1,5 @@
 source 'http://rubygems.org/'
 ruby '2.1.0'
-gem 'mysql2'
 gem 'twitter'
 gem 'data_mapper'
 gem 'dm-mysql-adapter'
