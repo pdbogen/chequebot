@@ -3,7 +3,9 @@
 require 'rubygems'
 require 'logger'
 
-logger = Logger.new( STDOUT )
+$stdout.sync = true
+
+logger = Logger.new( $stdout )
 
 logger.info "Starting up..."
 
