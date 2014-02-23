@@ -29,9 +29,9 @@ class Chequebot
 			puts "%p" % [ since ]
 			if since.nil?
 			then
-				@rest_client.mentions_timeline( :count => 200, :trim_user => 1 } )
+				@rest_client.mentions_timeline( { :count => 200, :trim_user => 1 } )
 			else
-				@rest_client.mentions_timeline( :since_id => since, :count => 200, :trim_user => 1 } )
+				@rest_client.mentions_timeline( { :since_id => since, :count => 200, :trim_user => 1 } )
 			end
 		end
 		class RateLimitException < Exception
