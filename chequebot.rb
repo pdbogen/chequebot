@@ -26,7 +26,7 @@ class Chequebot
 			begin
 				runOnce
 			rescue RateLimitException
-				logger.debug "FIXME: sleep until rate limit renews"
+				@logger.debug "FIXME: sleep until rate limit renews"
 			end
 		end
 	end
@@ -66,8 +66,15 @@ class Chequebot
 
 	def scanNewMentions
 		@twitter.mentions( ChequebotDB::Mention.max( :tweetId ) ).each do |mention|
-			logger.debug "%p" % [mention]
+			text = normalizeTweet( mention.text )
+			@logger.debug "%p: %p" % [ mention.source, text ]
 		end
+	end
+
+	def normalizeTweet( text )
+		screen_name = @twitter.screen_name
+		normalized = text.gsub( /(\s+@#{screen_name})|(@#{screen_name}\s+)/i, "" );
+		@logger.debug "%p =~ s/%p//g = %p" % [ text, screen_name, normalized ]
 	end
 end
 
